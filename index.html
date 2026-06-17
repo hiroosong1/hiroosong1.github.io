@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hiroosong · 个人主页</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    :root {
+      --bg: #0f1115; --bg-card: #181c24; --bg-hover: #1e232c;
+      --text: #e4e7eb; --text-muted: #8b919e;
+      --accent: #3dd68c; --accent-glow: rgba(61, 214, 140, 0.15);
+      --border: #252b35; --radius: 12px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      padding: 16px 40px; display: flex; justify-content: space-between;
+      align-items: center; z-index: 100;
+      backdrop-filter: blur(12px);
+      background: rgba(15,17,21,0.8); border-bottom: 1px solid var(--border);
+    }
+    nav .logo { font-weight: 700; font-size: 18px; letter-spacing: -0.02em; }
+    nav .logo span { color: var(--accent); }
+    nav ul { display: flex; list-style: none; gap: 28px; }
+    nav ul a { color: var(--text-muted); font-size: 14px; font-weight: 500; transition: color 0.2s; }
+    nav ul a:hover { color: var(--text); }
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      justify-content: center; align-items: center; text-align: center;
+      padding: 0 24px; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -200px; left: 50%;
+      transform: translateX(-50%); width: 600px; height: 600px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-avatar {
+      width: 120px; height: 120px; border-radius: 50%;
+      border: 3px solid var(--border); margin-bottom: 24px;
+      position: relative; z-index: 1; transition: transform 0.3s ease;
+    }
+    .hero-avatar:hover { transform: scale(1.05); }
+    .hero h1 { font-size: clamp(36px, 6vw, 64px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; position: relative; z-index: 1; }
+    .hero .tagline { font-size: clamp(16px, 2.5vw, 20px); color: var(--text-muted); max-width: 480px; position: relative; z-index: 1; margin-bottom: 36px; }
+    .hero .tagline span { color: var(--accent); font-weight: 500; }
+    .hero-cta { display: flex; gap: 12px; position: relative; z-index: 1; flex-wrap: wrap; justify-content: center; }
+    .btn {
+      padding: 12px 28px; border-radius: var(--radius);
+      font-size: 15px; font-weight: 600; cursor: pointer;
+      transition: all 0.2s ease; border: none;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary { background: var(--accent); color: #0f1115; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px var(--accent-glow); }
+    .btn-ghost { background: var(--bg-card); color: var(--text); border: 1px solid var(--border); }
+    .btn-ghost:hover { background: var(--bg-hover); border-color: var(--text-muted); }
+    section { padding: 100px 40px; max-width: 800px; margin: 0 auto; }
+    .section-title { font-size: 14px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); font-weight: 600; margin-bottom: 8px; }
+    .section-heading { font-size: clamp(28px, 4vw, 40px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 40px; }
+    .about p { font-size: 17px; color: var(--text-muted); line-height: 1.8; margin-bottom: 16px; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+    .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; transition: all 0.3s ease; }
+    .card:hover { background: var(--bg-hover); border-color: var(--text-muted); transform: translateY(-4px); }
+    .card-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--accent-glow); display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 16px; }
+    .card h3 { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
+    .card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+    .socials { display: flex; gap: 16px; justify-content: center; margin-top: 32px; }
+    .social-link {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s ease;
+    }
+    .social-link:hover { background: var(--accent); color: #0f1115; border-color: var(--accent); transform: translateY(-3px); }
+    footer { text-align: center; padding: 40px; color: var(--text-muted); font-size: 14px; border-top: 1px solid var(--border); }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @media (max-width: 640px) {
+      nav { padding: 14px 20px; }
+      nav ul { gap: 16px; }
+      nav ul a { font-size: 13px; }
+      section { padding: 60px 20px; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">hiro<span>osong</span></div>
+    <ul>
+      <li><a href="#about">关于</a></li>
+      <li><a href="#interests">兴趣</a></li>
+      <li><a href="#contact">联系</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero">
+    <img src="https://avatars.githubusercontent.com/u/159447785?v=4" alt="头像" class="hero-avatar">
+    <h1>你好，我是 hiroosong</h1>
+    <p class="tagline">欢迎来到我的<span>个人主页</span>。这里记录我的探索与成长。</p>
+    <div class="hero-cta">
+      <a href="#about" class="btn btn-primary">了解更多 ↓</a>
+      <a href="https://github.com/hiroosong1" target="_blank" class="btn btn-ghost">GitHub →</a>
+    </div>
+  </div>
+
+  <section id="about" class="about reveal">
+    <div class="section-title">关于我</div>
+    <h2 class="section-heading">简单介绍一下自己</h2>
+    <p>你好！我是 hiroosong，一个正在探索技术和创造力的人。这是我第一次搭建个人网站，一切都是新的开始。</p>
+    <p>我相信保持好奇心是最好的学习方式。无论是写代码、看世界、还是尝试新事物，我都愿意去试试看。</p>
+    <p>这个网站会随着我的成长不断更新，记录我走过的路。感谢你的来访！</p>
+  </section>
+
+  <section id="interests" class="reveal">
+    <div class="section-title">兴趣方向</div>
+    <h2 class="section-heading">我感兴趣的领域</h2>
+    <div class="cards">
+      <div class="card"><div class="card-icon">💡</div><h3>探索新事物</h3><p>对世界保持好奇，乐于尝试新工具、新技术、新领域。</p></div>
+      <div class="card"><div class="card-icon">🚀</div><h3>个人成长</h3><p>每天进步一点点，相信持续学习的力量。</p></div>
+      <div class="card"><div class="card-icon">🌐</div><h3>互联网世界</h3><p>正在探索 GitHub 和开源世界的无限可能。</p></div>
+      <div class="card"><div class="card-icon">✨</div><h3>创造力</h3><p>喜欢把想法变成现实，从零开始搭建有趣的东西。</p></div>
+    </div>
+  </section>
+
+  <section id="contact" class="reveal">
+    <div class="section-title">保持联系</div>
+    <h2 class="section-heading">来打个招呼吧</h2>
+    <p style="color: var(--text-muted); font-size: 17px;">如果想聊聊，或者一起做点什么有趣的事，随时可以找到我。</p>
+    <div class="socials">
+      <a href="https://github.com/hiroosong1" target="_blank" class="social-link" title="GitHub">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+      </a>
+      <a href="mailto:hello@example.com" class="social-link" title="Email">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <footer><p>© 2025 hiroosong · 用 ❤️ 搭建</p></footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
