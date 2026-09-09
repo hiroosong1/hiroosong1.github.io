@@ -3,45 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>文章 · Roosong</title>
-  <style>
-    :root { --bg: #0f1115; --card: #181c24; --text: #e4e7eb; --muted: #8b919e; --accent: #3dd68c; --border: #252b35; }
-    * { box-sizing: border-box; }
-    body { margin: 0; background: var(--bg); color: var(--text); font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.8; }
-    a { color: inherit; text-decoration: none; }
-    .wrap { width: min(760px, calc(100% - 40px)); margin: 0 auto; padding: 48px 0 80px; }
-    .back { color: var(--muted); font-size: 14px; }
-    .back:hover { color: var(--accent); }
-    h1 { font-size: clamp(34px, 7vw, 56px); line-height: 1.1; letter-spacing: -0.03em; margin: 48px 0 12px; }
-    .date { color: var(--accent); font-size: 14px; font-weight: 600; }
-    article { margin-top: 44px; }
-    article p { color: #c5c9d0; font-size: 17px; }
-    article h2 { font-size: 24px; margin: 36px 0 12px; }
-    .post-link { display: block; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 26px; transition: 0.2s ease; }
-    .post-link:hover { background: #1e232c; border-color: var(--muted); transform: translateY(-3px); }
-    .post-link h2 { margin: 8px 0; font-size: 22px; }
-    .post-link p { margin: 0; color: var(--muted); font-size: 15px; }
-    footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
-  </style>
+  <title>文章 · Roosong 的博客</title>
+  <meta name="description" content="Roosong 的文章列表。">
+  <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
-  <main class="wrap">
-    <a class="back" href="/">← 返回首页</a>
-    <h1>文章</h1>
-    <p class="date">持续记录，慢慢更新</p>
-    <section style="margin-top:40px">
-      <a class="post-link" href="/blog/ai-truth-andrew-ng.html">
-        <span class="date">2026.09.09</span>
-        <h2>AI 的真相：吴恩达谈恐惧、就业与未来的真正机会</h2>
-        <p>当 AI 恐慌被不断放大，我们更应该看清什么？这是一份关于就业、学习、隐私、创业与 AGI 的访谈精编。</p>
-      </a>
-      <a class="post-link" href="/blog/hello-world.html">
-        <span class="date">2026.09.09</span>
-        <h2>开始写博客</h2>
-        <p>记录想法、学习和生活，也给自己留一个可以持续整理和回看的地方。</p>
-      </a>
-    </section>
-    <footer>© 2026 Roosong · GitHub Pages</footer>
-  </main>
+  <div class="container">
+    <header class="site-header">
+      <h1 class="site-title"><a href="/">Roosong 的博客</a></h1>
+      <nav class="site-nav">
+        <a href="/">首页</a>
+        <a href="/blog/">文章</a>
+        <a href="https://github.com/hiroosong1">GitHub</a>
+      </nav>
+    </header>
+
+    <main>
+      <h1>文章</h1>
+      <p class="article-meta">持续记录，慢慢更新</p>
+
+      <div class="post-list">
+        <div class="post-item">
+          <span class="post-date">2026-09-09</span>
+          <a class="post-title" href="/blog/ai-truth-andrew-ng.html">AI 的真相：吴恩达谈恐惧、就业与未来的真正机会</a>
+          <p class="post-summary">当 AI 恐慌被不断放大，我们更应该看清什么？这是一份关于就业、学习、隐私、创业与 AGI 的访谈精编。</p>
+        </div>
+        <div class="post-item">
+          <span class="post-date">2026-09-09</span>
+          <a class="post-title" href="/blog/hello-world.html">开始写博客</a>
+          <p class="post-summary">记录想法、学习和生活，也给自己留一个可以持续整理和回看的地方。</p>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      © 2026 Roosong · Built with GitHub Pages
+    </footer>
+  </div>
 </body>
 </html>
